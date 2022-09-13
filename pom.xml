@@ -17,6 +17,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -87,22 +92,22 @@
             </plugin>
         </plugins>
         <resources>
-        <resource>
-            <directory>src/main/java</directory><!---设置编译的包-->
-            <includes>
-                <include>**/*.xml</include><!---该路径下的.xml类型文件也要编译-->
-                <include>**/*.properties</include><!---该路径下的.properties类型文件也要编译-->
-            </includes>
-            <filtering>false</filtering>
-        </resource>
-        <resource>
-            <directory>src/main/resources</directory><!---设置编译的包-->
-            <includes>
-                <include>**/*.*</include><!---该路径下的.xml类型文件也要编译-->
-            </includes>
-            <filtering>false</filtering>
-        </resource>
-    </resources>
+            <resource>
+                <directory>src/main/java</directory><!---设置编译的包-->
+                <includes>
+                    <include>**/*.xml</include><!---该路径下的.xml类型文件也要编译-->
+                    <include>**/*.properties</include><!---该路径下的.properties类型文件也要编译-->
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory><!---设置编译的包-->
+                <includes>
+                    <include>**/*.*</include><!---该路径下的.xml类型文件也要编译-->
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

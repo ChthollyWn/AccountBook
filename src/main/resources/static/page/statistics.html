@@ -2,12 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/submit.css"/>
-    <link rel="stylesheet" href="./css/home.css"/>
+    <link rel="stylesheet" href="css/statistics.css"/>
     <title>账单详情</title>
 </head>
 <body>
-<div id="box">
+    <div id="app" class="content">
+        <div class="add">
+            <a class="button" href="index.html">首页</a>
+            <a class="button" href="add.html">新增</a>
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>序号</th>
+                <th>记账类型</th>
+                <th>记账分类</th>
+                <th>金额</th>
+                <th>创建时间</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="a in list">
+                <td>{{a.id}}</td>
+                <td>{{a.}}</td>
+                <td>{{a.type}}</td>
+                <td>{{a.money}}</td>
+                <td>{{a.time}}</td>
+                <td>{{a.note}}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" v-on:click="doDel(a.id)">删除</button>
+                    <a class="btn btn-info btn-sm" v-bind:href="'update.html?id='+a.id">修改</a>
+                </td>
+
+            </tr>
+        </table>
+
+    </div>
+
+    <script src="js/vue.min.js"></script>
+    <script src="js/axios.min.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: []
+            },
+            // 删除
+            methods: {
+                doDel: function (id) {
+                    axios.get().then(resp =>
+                    {
+                        alert('删除完毕' + resp.data);
+                        location.href='';
+                    })
+                }
+            },
+            mounted:function (){
+                axios.get()
+                    .then(resp => this. = resp.data)
+            }
+        })
+
+
+    </script>
+
 
 </div>
 

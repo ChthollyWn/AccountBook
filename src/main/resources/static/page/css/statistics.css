@@ -1,0 +1,26 @@
+a{
+    text-decoration: none;
+    color: #17a2b8;
+}
+a:hover{
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.button{
+    margin-left: 153px;
+
+}
+a:focus{
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+}
+.table{
+    margin: 0 auto;
+    text-align: center;
+}
+.table .thead-dark th {
+    color: #fff;
+    background-color: green;
+    border-color: green;
+    width: 200px;
+}
