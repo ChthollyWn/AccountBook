@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap-4.6.0-dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-4.6.0-dist\css\bootstrap-icons.css">
+    <script src="js/jquery.min.1.10.2.js"></script>
+    <style type="text/css">
+        a{
+            color:#000;
+        }
+        a:hover{
+            color: #000;
+            text-decoration: none;
+        }
+        nav{
+            background: #1ABC9C !important;
+            color: #2b2b2b;
+            height: 55px;
+            line-height: 55px;
+            border-bottom: #c2c0c0 1px solid;
+        }
+        nav>a:hover{
+            color: #fff;
+            text-decoration: none;
+        }
+        nav>a{
+            color: #fff;
+            display: inline-block;
+            font-size: 19px;
+            width: 200px;
+            text-align: center;
+        }
+        nav .loginfo{
+            float: right;
+        }
+        .loginfo span{
+            display: inline-block;
+        }
+        .loginfo a{
+            color: #fff;
+        }
+        /*----------*/
+        .navleft{
+            position: absolute;
+            background-color: #263238;
+            top: 55px;
+            bottom: 0px;
+            width: 200px;
+            left: 0;
+            border-right: 1px solid #f3f3f3;
+        }
+        .navleft  .info{
+            text-align: center;
+            margin: 25px 0;
+        }
+        .info img{
+            width: 80px;
+        }
+
+        .items{
+            color: #7b7c7d;
+            line-height: 50px;
+            margin: 0px 10px 0px 25px;
+        }
+        .fu{
+            color: #adabab;
+            cursor: pointer;
+            user-select:none;
+        }
+        .navleft ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            display: none;
+        }
+        .items a{
+            display: block;
+        }
+        .items a.active{
+            color: white;
+            background: #202b30;
+        }
+        .items a:hover{
+            color:white;
+        }
+
+        .navleft li a{
+            padding-left:10px;
+        }
+
+        .fu .bi:first-child{
+            margin-right: 5px;
+        }
+        .fu .bi:last-child{
+            float: right;
+            font-size: 22px;
+        }
+        .fu .bi{
+            transition: transform ease-in-out 0.2s;
+        }
+        .rotate90{
+            transform: rotate(90deg);
+        }
+        /*----------*/
+        .navright{
+            position: absolute;
+            left: 201px;
+            right: 0px;
+            top: 55px;
+            bottom: 0px;
+        }
+        .bb{
+            color: #adabab;
+        }
+    </style>
+</head>
+<body>
+<!-- 顶部导航 -->
+<nav>
+    <a class="title" href="#">
+        个人记账管理系统
+    </a>
+</nav>
+
+<div class="navleft">
+    <div class="items">
+        <div>
+            <a class="fu" href="#">
+                <i class="bi bi-newspaper"></i>
+                <span>首页</span>
+            </a>
+        </div>
+        <div>
+            <div class="fu">
+                <i class="bi bi-file-ppt"></i>
+                <span>记账管理</span>
+                <i class="bi bi-arrow-right-short"></i>
+            </div>
+            <ul>
+                <li><a href="#" target="main" class="bb">记账分类</a></li>
+                <li><a href="#" target="main" class="bb">记账信息</a></li>
+                <li><a href="#" target="main" class="bb">记账统计</a></li>
+            </ul>
+        </div>
+        <div>
+            <a class="fu" href="#">
+                <i class="bi bi-newspaper"></i>
+                <span>统计与分析</span>
+            </a>
+        </div>
+        <div>
+            <a class="fu" href="login.html" target="main">
+                <i class="bi bi-person-square"></i>
+                <span>个人中心</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="navright">
+    <iframe id="main" name="main" src="" frameborder="0" width="100%" height="100%" ></iframe>
+</div>
+
+<script>
+
+    $('div.fu').click(function(event) {
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+            $(this).find('.bi-arrow-right-short').removeClass('rotate90');
+            $(this).next().slideUp();
+        }else{
+            $(this).addClass('active');
+            $(this).find('.bi-arrow-right-short').addClass('rotate90');
+            $(this).next().slideDown();
+        }
+    });
+    $('.items a').click(function () {
+        $('.items a').removeClass('active');
+        $(this).addClass('active');
+    })
+</script>
+
+
+</body>
+</html>
