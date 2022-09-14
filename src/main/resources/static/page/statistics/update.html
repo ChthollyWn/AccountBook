@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/add.css"/>
-    <title>新增一笔</title>
+    <title>修改</title>
 </head>
 <body>
 <div id="box">
@@ -30,13 +30,13 @@
 
         <div>
             <label>金额</label>
-            <input type="text" placeholder="请输入金额（元）" v-model="data.money">
+            <input type="text" placeholder="请输入金额（元）" v-model="info.accountmoney">
         </div>
 
 
         <div>
             <label>备注</label>
-            <input type="text" placeholder="" v-model="data.note">
+            <input type="text" placeholder="" v-model="info.marktext">
         </div>
 
 
@@ -47,29 +47,36 @@
 
 <script>
     var vm = new Vue({
-            el:"#box",
-            data: {
-                data: [],
-                type:[]
-            },
-            mounted: function () {
-                axios.get("/data/list").then(resp => this.data= resp.data);
-                axios.get("/type/list").then(resp => this.type= resp.data);
-            },
-            methods: {
-                doSubmit: function () {
-                    axios.get("/data/doAdd", {
-                        params: this.info}).then(resp => {
-                        if (resp.data == '1') {
-                            alert('插入成功');
-                            location.href = 'list.html';
-                        }
-                    })
-                }
+        el: "#box",
+        data: {
+            info:{},
+            data: [],
+            type: []
+        },
+        mounted: function () {
+            axios.get("/data/list").then(resp => this.acalist = resp.data);
+            axios.get("/type/list").then(resp => this.clazzlist = resp.data);
+            var id =location.href.split("=")[1];
+            axios.get("/data/getone?id="+id).then(resp=>{
+                console.log(resp.data);
+                this.info=resp.data
+            });
+        },
+        methods: {
+            doSubmit: function () {
+                axios.get("/data/doUpdate", {
+                    params: this.info
+                }).then(resp => {
+                    if (resp.data == '1') {
+                        alert('修改成功');
+                        location.href = 'list.html';//返回到list页面
+                    }
+                })
             }
+        }
+    })
 
-        })
-
+</script>
 
         </body>
     </html>

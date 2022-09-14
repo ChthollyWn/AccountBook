@@ -2,9 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="../css/statistics.css"/>
+    <title>支出详情</title>
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/axios.min.js"></script>
 </head>
 <body>
+<div id="app" class="content">
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr><h2 align="center">支出</h2></tr>
+        <tr>
+            <div class="add">
+                <a class="button" href="index.html">首页</a>
+                <a class="button" href="add.html">新增</a>
+                <a class="button" href="add.html">收入</a>
+            </div>
+        </tr>
+        <tr>
+            <th>序号</th>
+            <th>记账分类</th>
+            <th>金额</th>
+            <th>创建时间</th>
+            <th>备注</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="data in accountdata">
+            <td>{{data.accountid}}</td>
+            <td>{{data.accounttitle}}</td>
+            <td>{{data.accountmoney}}</td>
+            <td>{{data.time}}</td>
+            <td>{{data.marktext}}</td>
+
+            <td>
+                <button class="btn btn-danger btn-sm" v-on:click="doDel(data.accountID)">删除</button>
+                <a v-bind:href="'update.html?id='+data.accountid">修改</a>
+            </td>
+
+        </tr>
+    </table>
+
+</div>
+
+
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            accountdata:[]
+        },
+        mounted:function (){
+            axios.get("/data/list")
+                .then(resp => this.accountdata = resp.data)
+        },
+        // 删除
+        methods: {
+            doDel: function (id) {
+                axios.get("/data/doDel?id=" + data.accountID).then(resp =>
+                {
+                    alert('删除完毕' + resp.data);
+                    location.href='list.html';
+                })
+            }
+        }
+    })
+</script>
+
+
+</div>
 
 </body>
 </html>

@@ -12,10 +12,13 @@
 
     <table class="table">
         <thead class="thead-dark">
+        <tr><h2 align="center">总览</h2></tr>
         <tr>
             <div class="add">
                 <a class="button" href="index.html">首页</a>
                 <a class="button" href="add.html">新增</a>
+                <a class="button" href="add.html">收入</a>
+                <a class="button" href="add.html">支出</a>
             </div>
         </tr>
         <tr>
@@ -37,7 +40,7 @@
             <td>{{data.marktext}}</td>
             <td>{{data.time}}</td>
             <td>
-                <button class="btn btn-danger btn-sm" v-on:click="doDel(data.accountID)">删除</button>
+                <button class="btn btn-danger btn-sm" v-on:click="doDel(data.accountid)">删除</button>
                 <a v-bind:href="'update.html?id='+data.accountid">修改</a>
             </td>
 

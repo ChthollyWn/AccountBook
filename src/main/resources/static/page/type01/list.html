@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/statistics.css"/>
-    <title>账单详情</title>
+    <title>收入详情</title>
     <script src="../js/vue.min.js"></script>
     <script src="../js/axios.min.js"></script>
 </head>
@@ -12,15 +12,16 @@
 
     <table class="table">
         <thead class="thead-dark">
+        <tr><h2 align="center">收入</h2></tr>
         <tr>
             <div class="add">
-                <a class="button" href="index.html">首页</a>
-                <a class="button" href="add.html">新增</a>
+                <a class="button" href="">首页</a>
+                <a class="button" href="">新增</a>
+                <a class="button" href="">支出</a>
             </div>
         </tr>
         <tr>
             <th>序号</th>
-            <th>记账类型</th>
             <th>记账分类</th>
             <th>金额</th>
             <th>创建时间</th>
@@ -33,8 +34,9 @@
             <td>{{data.accountid}}</td>
             <td>{{data.accounttitle}}</td>
             <td>{{data.accountmoney}}</td>
-            <td>{{data.marktext}}</td>
             <td>{{data.time}}</td>
+            <td>{{data.marktext}}</td>
+
             <td>
                 <button class="btn btn-danger btn-sm" v-on:click="doDel(data.accountID)">删除</button>
                 <a v-bind:href="'update.html?id='+data.accountid">修改</a>
