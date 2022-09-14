@@ -5,6 +5,4 @@ import com.example.accountbook.model.Testdb;
 
 public interface TestdbMapper extends BaseMapper<Testdb> {
 
-
-
 }
