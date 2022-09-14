@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/add.css"/>
-    <title>新增一笔</title>
+    <title>修改</title>
 </head>
 <body>
 <div id="box">
@@ -39,7 +39,7 @@
     </div>
 
 
-        <input id="submit" type="submit" value="确认">
+    <input id="submit" type="submit" value="确认">
 
 
 </div>
@@ -48,29 +48,34 @@
 <script src="js/axios.min.js"></script>
 <script>
     var vm = new Vue({
-            el: "#app",
-            data: {
-                info: {},
-                datalist: []
-            },
-            mounted: function () {
-                axios.get("/data/list").then(resp => this.acalist = resp.data);
-            },
-            methods: {
-                doSubmit: function () {
-                    axios.get("/data/doAdd", {
-                        params: this.info
-                    }).then(resp => {
-                        if (resp.data == '1') {
-                            alert('插入成功');
-                            location.href = 'statistics.html';
-                        }
-                    })
-                }
+        el:"#box",
+        data:{
+            info:{}
+        },
+        mounted: function () {
+            axios.get("/data/list").then(resp => this.datalist = resp.data);
+            var id =location.href.split("=")[1];
+            axios.get("/data/getone?id="+id).then(resp=>{
+                console.log(resp.data);
+                this.info=resp.data
+            });
+        },
+        methods:{
+            doSubmit:function () {
+                axios.get("/data/doUpdate",{
+                    params:this.info
+                }).then(resp => {
+                    if(resp.data=='1'){
+                        alert('插入成功');
+                        location.href = 'statistics.html';//返回到list页面
+                    }
+                })
             }
+        }
 
-        })
+    })
 
+</script>
 
 </body>
 </html>
