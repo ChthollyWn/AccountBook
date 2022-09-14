@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/statistics.css"/>
+    <link rel="stylesheet" href="../css/statistics.css"/>
     <title>账单详情</title>
-    <script src="js/vue.min.js"></script>
-    <script src="js/axios.min.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/axios.min.js"></script>
 </head>
 <body>
 <div id="app" class="content">
@@ -14,7 +14,7 @@
         <thead class="thead-dark">
         <tr>
             <div class="add">
-                <a class="button" href="home.html">首页</a>
+                <a class="button" href="index.html">首页</a>
                 <a class="button" href="add.html">新增</a>
             </div>
         </tr>
@@ -38,7 +38,7 @@
             <td>{{data.time}}</td>
             <td>
                 <button class="btn btn-danger btn-sm" v-on:click="doDel(data.accountID)">删除</button>
-                <a v-bind:href="'update.html?id='+data.accountID">修改</a>
+                <a v-bind:href="'update.html?id='+data.accountid">修改</a>
             </td>
 
         </tr>

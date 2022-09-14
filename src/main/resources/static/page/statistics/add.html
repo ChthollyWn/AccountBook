@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/add.css"/>
+    <link rel="stylesheet" href="../css/add.css"/>
     <title>新增一笔</title>
 </head>
 <body>
 <div id="box">
 
-    <script src="js/vue.min.js"></script>
-    <script src="js/axios.min.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/axios.min.js"></script>
 
     <div>
         <label>收支类型</label>
         <select>
-            <option v-for="data in accountdata" v-bind:value="data.accountid">{{data.type}}</option>
+            <option v-for="data in accountdata" v-bind:value="data.accountid">{{data.accounttype}}</option>
         </select>
     </div>
 
@@ -22,39 +22,36 @@
     <div>
         <label>分类名</label>
         <select>
-            <option v-for="data in accountdata" v-bind:value="data.id">{{accountdata.name}}</option>
+            <option v-for="data in accountdata" v-bind:value="data.accounttype">{{info.name}}</option>
         </select>
     </div>
 
 
     <div>
         <label>金额</label>
-        <input type="text" placeholder="请输入金额（元）" v-model="info.money">
+        <input type="text" placeholder="请输入金额（元）" v-model="acconutdata.money">
     </div>
 
 
     <div>
         <label>备注</label>
-        <input type="text" placeholder="" v-model="info.note">
+        <input type="text" placeholder="" v-model="acconutdata.note">
     </div>
 
 
-        <input id="submit" type="submit" value="确认">
+    <input id="submit" type="submit" value="确认">
 
 
 </div>
 
-<script src="js/vue.min.js"></script>
-<script src="js/axios.min.js"></script>
 <script>
     var vm = new Vue({
             el: "#app",
             data: {
-                info: {},
-                datalist: []
+                accountdata: []
             },
             mounted: function () {
-                axios.get("/data/list").then(resp => this.acalist = resp.data);
+                axios.get("/data/list").then(resp => this.accountdata = resp.data);
             },
             methods: {
                 doSubmit: function () {
@@ -62,7 +59,7 @@
                         params: this.info}).then(resp => {
                         if (resp.data == '1') {
                             alert('插入成功');
-                            location.href = 'statistics.html';
+                            location.href = 'list.html';
                         }
                     })
                 }
@@ -71,5 +68,5 @@
         })
 
 
-</body>
-</html>
+        </body>
+    </html>
