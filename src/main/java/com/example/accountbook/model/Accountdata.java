@@ -65,8 +65,7 @@ public class Accountdata {
     public Accountdata() {
     }
 
-    public Accountdata(int accountid, int typeid, String accounttitle, float accountmoney, String marktext, String accounttime) {
-        this.accountid = accountid;
+    public Accountdata(int typeid, String accounttitle, float accountmoney, String marktext, String accounttime) {
         this.typeid = typeid;
         this.accounttitle = accounttitle;
         this.accountmoney = accountmoney;
