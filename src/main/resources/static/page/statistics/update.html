@@ -57,14 +57,14 @@
             axios.get("/data/list").then(resp => this.acalist = resp.data);
             axios.get("/type/list").then(resp => this.clazzlist = resp.data);
             var id =location.href.split("=")[1];
-            axios.get("/data/getone?id="+id).then(resp=>{
+            axios.get("/data/updata?id="+id).then(resp=>{
                 console.log(resp.data);
                 this.info=resp.data
             });
         },
         methods: {
             doSubmit: function () {
-                axios.get("/data/doUpdate", {
+                axios.get("/data/update", {
                     params: this.info
                 }).then(resp => {
                     if (resp.data == '1') {

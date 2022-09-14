@@ -30,7 +30,7 @@ public class AccountdataController {
         return res;
     }
 
-    @RequestMapping("delete")
+    @RequestMapping("/delete")
     @ResponseBody
     public int doDelete(int id){
         int res = accountdataMapper.deleteById(id);

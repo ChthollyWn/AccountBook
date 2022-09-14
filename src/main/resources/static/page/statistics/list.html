@@ -34,6 +34,7 @@
         <tbody>
         <tr v-for="data in accountdata">
             <td>{{data.accountid}}</td>
+            <td></td>
             <td>{{data.accounttype}}</td>
             <td>{{data.accounttitle}}</td>
             <td>{{data.accountmoney}}</td>
@@ -64,13 +65,14 @@
         // 删除
         methods: {
             doDel: function (id) {
-                axios.get("/data/doDel?id=" + data.accountID).then(resp =>
+                axios.get("/data/delete?id="+ id).then(resp =>
                 {
                     alert('删除完毕' + resp.data);
-                    location.href='list.html';
+                    location.href='list.html'
                 })
             }
         }
+
     })
 </script>
 

@@ -14,8 +14,7 @@
     <div>
         <label>收支类型</label>
         <select>
-            <option>0</option>
-            <option>1</option>
+            <option v-for="a in typeidlist" v-bind:value="a.typeid">{{a.typename}}</option>
         </select>
     </div>
 
@@ -49,6 +48,10 @@
     var vm = new Vue({
             el:"#box",
             data: {
+                typeidlist:[
+                    {typeid:0,typename:收入},
+                    {typeid:0,typename:支出
+                ],
                 data: [],
                 type:[]
             },
@@ -58,7 +61,7 @@
             },
             methods: {
                 doSubmit: function () {
-                    axios.get("/data/doAdd", {
+                    axios.get("/data/add", {
                         params: this.data}).then(resp => {
                         if (resp.data == '1') {
                             alert('插入成功');
