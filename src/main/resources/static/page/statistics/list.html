@@ -13,7 +13,7 @@
 
     <table class="table">
         <thead class="thead-dark">
-        <tr><h2 align="center">总览</h2></tr>
+<!--        <tr><h2 align="center">总览</h2></tr>-->
         <tr>
             <div class="add">
 
@@ -34,7 +34,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="data in accountdata">
+        <tr id="datashow" v-for="data in accountdata">
             <td>{{data.accountid}}</td>
             <td>{{data.accounttype}}</td>
             <td>{{data.accounttitle}}</td>
