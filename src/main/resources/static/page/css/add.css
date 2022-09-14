@@ -1,3 +1,7 @@
+a{
+    text-decoration: none;
+    color:white;
+}
 #box{
     margin: 0 auto;
     margin-top: 200px;
@@ -5,7 +9,7 @@
     background-color:lightseagreen;
     opacity: 0.9;
     width: 400px;
-    height: 350px;
+    height: 400px;
     border-radius: 10px;
 
 }
@@ -30,6 +34,7 @@
    float: right;
 }
 #submitbutton{
+    margin-bottom: 5px;
     border: 0px;
     width: 200px;
     height: 25px;
@@ -50,6 +55,31 @@
     text-align: center;
     border-radius: 20px;
     background-color:orangered;
+    transform: translateX(-2px) ;
+    transform: translateY(-2px) ;
+}
+.back{
+
+    border: 0px;
+    width: 200px;
+    height: 25px;
+    color: white;
+    margin-left:100px ;
+    text-align: center;
+    border-radius: 20px;
+    background-color:gray;
+}
+.back:hover{
+
+    border: 12px;
+    border-color: black;
+    width: 200px;
+    height: 25px;
+    color: white;
+    margin-left:100px ;
+    text-align: center;
+    border-radius: 20px;
+    background-color:red;
     transform: translateX(-2px) ;
     transform: translateY(-2px) ;
 }
