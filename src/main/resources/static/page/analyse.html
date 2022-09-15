@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计与分析</title>
+  <link rel="stylesheet" href="bootstrap-4.6.1-dist\css\bootstrap.min.css">
+  <script src="js\vue.min.js"></script>
+  <script src="js\axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">总收入</th>
+      <th scope="col">总支出</th>
+      <th scope="col">收支</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.income}}元</td>
+      <td>{{this.expend}}元</td>
+      <td>{{this.nums}}元</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      income:0.0,
+      expend:0.0,
+      nums:0.0
+    },
+    mounted:function (){
+      axios.get("/data/income").then(resp => this.income = resp.data),
+              axios.get("/data/expend").then(resp => this.expend = resp.data),
+              axios.get("/data/nums").then(resp => this.nums = resp.data)
+    }
+  })
+</script>
+</body>
+</html>

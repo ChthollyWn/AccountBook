@@ -1,13 +1,17 @@
 package com.example.accountbook.controllers;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.accountbook.mapper.AccountdataMapper;
+import com.example.accountbook.mapper.AccounttypeMapper;
 import com.example.accountbook.model.Accountdata;
+import com.example.accountbook.model.Accounttype;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +21,7 @@ public class AccountdataController {
 
     @Autowired
     private AccountdataMapper accountdataMapper;
+
 
     @RequestMapping("/list")
     @ResponseBody
@@ -59,6 +64,38 @@ public class AccountdataController {
     public Accountdata getOne(int id){
         Accountdata accountdata = accountdataMapper.selectById(id);
         return accountdata;
+    }
+
+    @RequestMapping("/income")
+    @ResponseBody
+    public float Income(){
+        float nums = 0;
+        QueryWrapper<Accountdata> wrapper = new QueryWrapper<>();
+        wrapper.eq("accounttype",1);
+        List<Accountdata> accountdata = accountdataMapper.selectList(wrapper);
+        for (Accountdata accountdatum : accountdata) {
+            nums+=accountdatum.getAccountmoney();
+        }
+        return nums;
+    }
+
+    @RequestMapping("/expend")
+    @ResponseBody
+    public float Expend(){
+        float nums = 0;
+        QueryWrapper<Accountdata> wrapper = new QueryWrapper<>();
+        wrapper.eq("accounttype",0);
+        List<Accountdata> accountdata = accountdataMapper.selectList(wrapper);
+        for (Accountdata accountdatum : accountdata) {
+            nums+=accountdatum.getAccountmoney();
+        }
+        return nums;
+    }
+
+    @RequestMapping("/nums")
+    @ResponseBody
+    public float Nums(){
+        return (Income() - Expend());
     }
 
 }
