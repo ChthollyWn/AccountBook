@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/add.css"/>
-    <script src="js/vue.min.js"></script>
-    <script src="js/axios.min.js"></script>
     <title>新增一笔</title>
 </head>
 <body>
 <div id="box">
 
-    <form v-on:submit.prevent="doSubmit">
+    <script src="js/vue.min.js"></script>
+    <script src="js/axios.min.js"></script>
+
     <div>
         <label>收支类型</label>
         <select>
-            <option v-for="a in typelist" v-bind:value="a.typeid">{{a.typename}}</option>
+            <option v-for="data in datalist" v-bind:value="data.id">{{data.type}}</option>
         </select>
     </div>
 
@@ -22,50 +22,48 @@
     <div>
         <label>分类名</label>
         <select>
-            <option v-for="b in accountdatalist" v-bind:value="b.id">{{b.accounttitle}}</option>
+            <option v-for="data in datalist" v-bind:value="data.id">{{data.name}}</option>
         </select>
     </div>
 
 
-<!--    <div>-->
-<!--        <label>金额</label>-->
-<!--        <input type="text" placeholder="请输入金额（元）" v-model="info.money">-->
-<!--    </div>-->
+    <div>
+        <label>金额</label>
+        <input type="text" placeholder="请输入金额（元）" v-model="info.money">
+    </div>
 
 
-<!--    <div>-->
-<!--        <label>备注</label>-->
-<!--        <input type="text" placeholder="" v-model="info.note">-->
-<!--    </div>-->
+    <div>
+        <label>备注</label>
+        <input type="text" placeholder="" v-model="info.note">
+    </div>
 
 
-<!--        <input id="submit" type="submit" value="确认">-->
-</form>
+        <input id="submit" type="submit" value="确认">
+
 
 </div>
 
 <script src="js/vue.min.js"></script>
 <script src="js/axios.min.js"></script>
 <script>
-
     var vm = new Vue({
-            el: "#box",
+            el: "#app",
             data: {
-                accountdatalist: [],
-                typelist:[],
                 info: {},
+                datalist: []
             },
             mounted: function () {
-                axios.get("/data/list").then(resp => this.accountdatalist = resp.data);
-                axios.get("/type/list").then(resp => this.typelist = resp.data);
+                axios.get("/data/list").then(resp => this.acalist = resp.data);
             },
             methods: {
                 doSubmit: function () {
                     axios.get("/data/doAdd", {
-                        params: this.info}).then(resp => {
+                        params: this.info
+                    }).then(resp => {
                         if (resp.data == '1') {
                             alert('插入成功');
-                            location.href = 'list.html';
+                            location.href = 'statistics.html';
                         }
                     })
                 }
