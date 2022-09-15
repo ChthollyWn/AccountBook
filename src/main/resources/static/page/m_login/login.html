@@ -4,55 +4,28 @@
     <meta charset="utf-8">
     <title>Login</title>
 
+    <link rel="stylesheet" href="..\bootstrap-4.6.1-dist\css\bootstrap.min.css">
+    <script src="..\js\vue.min.js"></script>
+    <script src="..\js\axios.min.js"></script>
 </head>
-<style>
-    .logins {
-        width:400px;
-        height:300px;
-        border: 1px solid;
-        border-radius: 30px;
-        background-color:white;
-        text-align:center;
-        margin:200px auto;
-    }
-    #title{
-        margin-top: 15px;
-        color: #1ABC9C;
-    }
-    #input1{
-        width: 250px;
-        height: 35px;
-    }
-    #input2{
-        width: 250px;
-        height: 35px;
-        margin-top: 15px;
-    }
-    #input3{
-        width: 250px;
-        height: 35px;
-        color: white;
-        margin-top: 10px;
-        border-radius: 10px;
-        background-color: #1ABC9C;
-    }
-</style>
 <body>
-<script src="..\js\vue.min.js"></script>
-<script src="..\js\axios.min.js"></script>
-<div id="app" class="logins">
-    <h1 id="title"> 账号登录 </h1><br/>
+<div style="margin-left: 50px;margin-right: 50px;margin-top: 50px" id="app">
     <form v-on:submit.prevent="doSubmit">
-        <table  width=150px  align="center">
-            <td>
-                <div align="center">
-                    <input id="input1" type="text" name="username" placeholder="请输入用户名" v-model="username"><br>
-                    <input id="input2" type="password" name="password" placeholder="请输入密码" v-model="password"><br>
-                    <input id="input3" type="submit" value="登录" name="submit" >
-                    <a href="register.html">没有账户？点击注册</a>
-                </div>
-            </td>
-        </table>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">用户名</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" v-model="username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">密码</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" v-model="password">
+        </div>
+        <div class="form-group" style="width: 300px">
+            <button type="submit" class="btn btn-outline-success btn-lg btn-block">登录</button>
+        </div>
+        <div class="form-group" style="width: 300px">
+            <a href="register.html" class="btn btn-outline-info btn-lg btn-block">没有账户？点击注册</a>
+        </div>
+
     </form>
 </div>
 <script>
@@ -67,7 +40,9 @@
                 axios.get("/userdata/login", {params:{username:this.username,password:this.password}}).then(res => {
                         if(res.data == '1'){
                             alert("登录成功");
-
+                            location.href="../home.html"
+                        }else {
+                            alert("登录失败，请检查用户名和密码")
                         }
                     }
                 )

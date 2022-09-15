@@ -30,10 +30,11 @@ public class UserdataController {
     @RequestMapping("register")
     @ResponseBody
     public int register(String username,String password){
+        if(username.equals("") || password.equals("")) return -1;
         QueryWrapper<Userdata> wrapper = new QueryWrapper<>();
         wrapper.eq("username",username);
         Userdata user = userdataMapper.selectOne(wrapper);
-        if(user != null) return -1;
+        if(user != null) return -2;
         Userdata userNew = new Userdata(username,password);
         int res = userdataMapper.insert(userNew);
         return res;

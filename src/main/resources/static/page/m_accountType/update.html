@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/add.css"/>
+    <title>修改</title>
+    <link rel="stylesheet" href="..\bootstrap-4.6.1-dist\css\bootstrap.min.css">
+    <script src="..\js\vue.min.js"></script>
+    <script src="..\js\axios.min.js"></script>
+</head>
+<body>
+<div style="margin-left: 50px;margin-right: 50px;margin-top: 50px" id="app">
+
+    <form v-on:submit.prevent="doSubmit">
+        <div class="form-group">
+            <label >内容</label>
+            <input class="form-control" type="text" v-model="info.typename">
+        </div>
+
+        <button type="submit" class="btn btn-primary">确定修改</button>
+    </form>
+
+</div>
+
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data: {
+            info:[]
+        },
+        mounted: function () {
+            var id = location.href.split("=")[1];
+            axios.get("/type/getone?id="+id).then(resp => this.info = resp.data)
+        },
+        methods: {
+            doSubmit: function () {
+                axios.get("/type/update", {
+                    params: this.info
+                    }).then(resp => {
+                    if (resp.data == '1') {
+                        alert('修改成功');
+                        location.href = "list.html";
+                    }else {
+                        alert("修改失败")
+                    }
+                })
+            }
+        }
+
+    })
+</script>
+
+        </body>
+    </html>

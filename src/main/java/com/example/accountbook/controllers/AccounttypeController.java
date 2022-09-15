@@ -45,10 +45,16 @@ public class AccounttypeController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public  int doUpdate(int id,String typename){
-        Accounttype accounttype = new Accounttype(id,typename);
+    public int doUpdate(Accounttype accounttype){
         int res = accounttypeMapper.updateById(accounttype);
         return res;
+    }
+
+    @RequestMapping("/getone")
+    @ResponseBody
+    public Accounttype getOne(int id){
+        Accounttype accounttype = accounttypeMapper.selectById(id);
+        return accounttype;
     }
 
 }

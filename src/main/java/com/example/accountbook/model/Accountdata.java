@@ -9,10 +9,26 @@ public class Accountdata {
 
     private int accountid;
     private int typeid;
+    private int accounttype;
     private String accounttitle;
     private float accountmoney;
     private String marktext;
     private String accounttime;
+
+    /*public Accountdata(int typeid, int accounttype, String accounttitle, float accountmoney, String marktext) {
+
+    }*/
+
+    public Accountdata(int typeid, int accounttype, String accounttitle, float accountmoney, String marktext) {
+        this.typeid = typeid;
+        this.accounttype = accounttype;
+        this.accounttitle = accounttitle;
+        this.accountmoney = accountmoney;
+        this.marktext = marktext;
+    }
+
+    public Accountdata() {
+    }
 
     public int getAccountid() {
         return accountid;
@@ -62,14 +78,12 @@ public class Accountdata {
         this.accounttime = accounttime;
     }
 
-    public Accountdata() {
+    public int getAccounttype() {
+        return accounttype;
     }
 
-    public Accountdata(int typeid, String accounttitle, float accountmoney, String marktext, String accounttime) {
-        this.typeid = typeid;
-        this.accounttitle = accounttitle;
-        this.accountmoney = accountmoney;
-        this.marktext = marktext;
-        this.accounttime = accounttime;
+    public void setAccounttype(int accounttype) {
+        this.accounttype = accounttype;
     }
+
 }

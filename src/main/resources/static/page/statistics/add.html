@@ -2,71 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/add.css"/>
     <title>新增一笔</title>
+    <link rel="stylesheet" href="..\bootstrap-4.6.1-dist\css\bootstrap.min.css">
+    <script src="..\js\vue.min.js"></script>
+    <script src="..\js\axios.min.js"></script>
 </head>
 <body>
-<div id="box">
-    <script src="../js/vue.min.js"></script>
-    <script src="../js/axios.min.js"></script>
-    <form v-on:submit.prevent="doSubmit">
+<div style="margin-left: 50px;margin-right: 50px;margin-top: 50px" id="app">
+     <form v-on:submit.prevent="doSubmit">
+             <div class="form-group">
+                 <label for="exampleFormControlInput1">账目标题</label>
+                 <input type="text" class="form-control" id="exampleFormControlInput1" v-model="accounttitle">
+             </div>
+             <div class="form-group">
+                 <label>收支类型</label>
+                 <select class="form-control" class="form-control" v-model="accounttype">
+                     <option v-bind:value="1">收入</option>
+                     <option v-bind:value="0">支出</option>
+                 </select>
+             </div>
+             <div class="form-group">
+                 <label>内容分类</label>
+                 <select class="form-control" class="form-control" v-model="typeid">
+                     <option v-for="t in type" v-bind:value="t.typeid">{{t.typename}}</option>
+                 </select>
+             </div>
+             <div class="form-group">
+                 <label >收支金额</label>
+                 <input class="form-control" type="text" v-model="accountmoney">
+             </div>
 
-    <div>
-        <label>收支类型</label>
-        <select>
-            <option v-for="a in typeidlist" v-bind:value="a.typeid">{{a.typename}}</option>
-        </select>
-    </div>
+             <div class="form-group">
+                 <label for="exampleFormControlTextarea1">备注</label>
+                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="marktext"></textarea>
+             </div>
 
+            <button type="submit" class="btn btn-primary">添加</button>
 
-    <div>
-        <label>分类名</label>
-        <select>
-            <option v-for="b in type" v-bind:value="b.typeid">{{b.typename}}</option>
-        </select>
-    </div>
+     </form>
 
-
-    <div>
-        <label>金额</label>
-        <input type="text" placeholder="请输入金额（元）" v-model="data.accountmoney">
-    </div>
-
-
-    <div>
-        <label>备注</label>
-        <input type="text" placeholder="备注" v-model="data.marktext">
-    </div>
-
-
-        <button type="submit" id="submitbutton" class="btn btn-primary">提交</button>
-        <input type="button" class="back" onclick="javascript:history.back(-1)"value="取消">
-
-    </form>
 </div>
 
 <script>
     var vm = new Vue({
-            el:"#box",
+            el:"#app",
             data: {
-                typeidlist:[
-                    {typeid:0,typename:收入},
-                    {typeid:0,typename:支出
-                ],
-                data: [],
-                type:[]
+                accounttype:"",
+                typeid:"",
+                accounttitle:"",
+                accountmoney:"",
+                marktext:"",
+                type:[],
             },
             mounted: function () {
-                axios.get("/data/list").then(resp => this.data= resp.data);
                 axios.get("/type/list").then(resp => this.type= resp.data);
             },
             methods: {
                 doSubmit: function () {
                     axios.get("/data/add", {
-                        params: this.data}).then(resp => {
+                        params: {
+                            typeid:this.typeid,
+                            accounttype:this.accounttype,
+                            accounttitle:this.accounttitle,
+                            accountmoney:this.accountmoney,
+                            marktext:this.marktext,
+                        }}).then(resp => {
                         if (resp.data == '1') {
-                            alert('插入成功');
-                            location.href = 'list.html';
+                            alert('添加成功');
+                            location.href = "list.html";
+                        }else {
+                            alert("添加失败")
                         }
                     })
                 }

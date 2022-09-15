@@ -3,20 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/index.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Home</title>
+    <link rel="stylesheet" href="bootstrap-4.6.1-dist\css\bootstrap.min.css">
+    <script src="..\js\vue.min.js"></script>
+    <script src="..\js\axios.min.js"></script>
 </head>
+<style>
+    .block{
+        height: 100px;
+        width: 300px;
+    }
+</style>
 <body>
 <div id="box">
-    <div class="button">
-        <ul>
-            <a href="add.html"><input type="button" id="bigbutton1" value="新添一笔"/></a>
-        </ul>
-        <ul>
-            <a href="statistics.html"><input type="button" id="bigbutton2" value="账单"/></a>
-        </ul>
-        <ul>
-            <a href="login.html"><input type="button" id="bigbutton3" value="退出"/></a>
-        </ul>
+
+    <div class="block">
+
+        <a href="statistics/add.html" class="btn btn-outline-primary btn-lg btn-block">新添一笔</a>
+
+    </div>
+    <div class="block">
+
+        <a href="statistics/list.html" class="btn btn-outline-success btn-lg btn-block">账单</a>
+
+    </div>
+    <div class="block">
+
+        <a href="m_login/login.html" class="btn btn-outline-warning btn-lg btn-block">登录</a>
+
+    </div>
+    <div class="block">
+
+        <a href="m_login/register.html" class="btn btn-outline-danger btn-lg btn-block">注册</a>
 
     </div>
 </div>

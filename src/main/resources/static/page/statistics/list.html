@@ -2,75 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/statistics.css"/>
     <title>账单详情</title>
+    <link rel="stylesheet" href="..\bootstrap-4.6.1-dist\css\bootstrap.min.css">
     <script src="../js/vue.min.js"></script>
     <script src="../js/axios.min.js"></script>
     <script src="../js/button.js"></script>
 </head>
 <body>
 <div id="app" class="content">
-
     <table class="table">
-        <thead class="thead-dark">
-<!--        <tr><h2 align="center">总览</h2></tr>-->
+        <thead class="thead-light">
         <tr>
-            <div class="add">
-
-               <td> <a data-animation="ripple" href="index.html">首页</a></td>
-                <td><a data-animation="ripple" href="add.html">新增</a></td>
-                <td><a data-animation="ripple" href="../type01/list.html">收入</a></td>
-                <td><a data-animation="ripple" href="../type02/list.html">支出</a></td>
-            </div>
-        </tr>
-        <tr>
-            <th>序号</th>
-            <th>记账类型</th>
-            <th>记账分类</th>
-            <th>金额</th>
-            <th>创建时间</th>
-            <th>备注</th>
-            <th>操作</th>
+            <th scope="col">编号</th>
+            <th scope="col">内容</th>
+            <th scope="col">收支</th>
+            <th scope="col">账目标题</th>
+            <th scope="col">收支金额</th>
+            <th scope="col">账目备注</th>
+            <th scope="col">记录时间</th>
+            <th scope="col">操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr id="datashow" v-for="data in accountdata">
-            <td>{{data.accountid}}</td>
-            <td>{{data.accounttype}}</td>
+        <tr v-for="data in accountdata">
+            <th scope="row">{{data.accountid}}</th>
+           <!-- <td v-for="t in types" >
+                <td v-if="t.typeid == data.typeid">{{t.typename}}</td>
+            </td>-->
+            <td>{{data.typeid}}</td>
+            <td>{{accounttype[data.accounttype]}}</td>
             <td>{{data.accounttitle}}</td>
             <td>{{data.accountmoney}}</td>
-            <td>{{data.accounttime}}</td>
             <td>{{data.marktext}}</td>
-
+            <td>{{data.accounttime}}</td>
             <td>
-                <button class="btn btn-danger btn-sm" v-on:click="doDel(data.accountid)">删除</button>
-                <a v-bind:href="'update.html?id='+data.accountid">修改</a>
+                <button type="button" class="btn btn-danger" v-on:click="doDel(data.accountid)">删除</button>
+                <a class="btn btn-primary" v-bind:href="'update.html?id='+data.accountid">修改</a>
             </td>
-
         </tr>
+        </tbody>
     </table>
 
 </div>
-
-
-
 <script>
     var vm = new Vue({
         el: '#app',
         data: {
+            accounttype:[
+                "支出",
+                "收入"
+            ],
+            types:[],
             accountdata:[]
         },
         mounted:function (){
             axios.get("/data/list")
                 .then(resp => this.accountdata = resp.data)
+            axios.get("/type/list").then(resp => this.types = resp.data)
         },
         // 删除
         methods: {
             doDel: function (id) {
                 axios.get("/data/delete?id="+ id).then(resp =>
                 {
-                    alert('删除完毕' + resp.data);
-                    location.href='list.html'
+                    alert('删除成功' + resp.data);
+                    location.href=("list.html")
                 })
             }
         }

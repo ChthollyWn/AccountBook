@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="..\bootstrap-4.6.1-dist\css\bootstrap.min.css">
+    <script src="..\js\vue.min.js"></script>
+    <script src="..\js\axios.min.js"></script>
 </head>
 <style>
     .regist {
         width:400px;
-        height:350px;
-        border: 1px solid;
-        border-radius: 30px;
+        height:300px;
         background-color:white;
+        border: #1ABC9C 1px solid;
+        border-radius: 20px;
         text-align:center;
         margin:200px auto;
     }
@@ -37,10 +40,26 @@
         background-color: #1ABC9C;
     }
 </style>
-<body>
+<body bgcolor="lightcyan">
 <script src="..\js\vue.min.js"></script>
 <script src="..\js\axios.min.js"></script>
-<div id="app" class="regist">
+<div style="margin-left: 50px;margin-right: 50px;margin-top: 50px" id="app">
+    <form v-on:submit.prevent="doSubmit">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">用户名</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" v-model="username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">密码</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" v-model="password">
+        </div>
+        <div class="form-group" style="width: 300px">
+            <button type="submit" class="btn btn-outline-info btn-lg btn-block">注册</button>
+        </div>
+
+    </form>
+</div>
+<!--<div id="app" class="regist">
     <h1 id="title"> 账号注册 </h1><br/>
     <form v-on:submit.prevent="doSubmit" id="regist">
         <table  width=150px  align="center">
@@ -48,12 +67,13 @@
                 <div align="center">
                     <input id="input1" type="text" name="username" placeholder="请输入用户名" v-model="username"><br>
                     <input id="input2" type="password" name="password" placeholder="请输入密码" v-model="password"><br>
-                    <input id="input3" type="submit" value="注册" name="submit" >
+                    &lt;!&ndash;<input id="input3" type="submit" value="注册" name="submit" >&ndash;&gt;
+                    <button type="submit" id="input3">注册</button>
                 </div>
             </td>
         </table>
     </form>
-</div>
+</div>-->
 <script>
     var vm = new Vue({
         el:"#app",
@@ -66,7 +86,11 @@
                 axios.get("/userdata/register", {params:{username:this.username,password:this.password}}).then(res => {
                         if(res.data == '1'){
                             alert("注册成功");
-                            location.href("login.html")
+                            location.href="login.html"
+                        }else if(res.data == '-1'){
+                            alert("注册失败，账号或密码不得为空！")
+                        }else {
+                            alert("注册失败，用户名已被占用！")
                         }
                     }
                 )

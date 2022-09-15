@@ -10,6 +10,10 @@ public class Accounttype {
     private int typeid;
     private String typename;
 
+    public Accounttype(String typename) {
+        this.typename = typename;
+    }
+
     public int getTypeid() {
         return typeid;
     }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,7 +27,15 @@ public class AccountdataController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public int doAdd(Accountdata accountdata){
+    public int doAdd(int typeid,int accounttype,String accounttitle,float accountmoney,String marktext){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String strDate = sdf.format( new Date() );
+
+        Accountdata accountdata = new Accountdata(typeid,accounttype,accounttitle,accountmoney,marktext);
+
+        accountdata.setAccounttime(strDate);
+
         int res = accountdataMapper.insert(accountdata);
         return res;
     }
@@ -42,6 +52,13 @@ public class AccountdataController {
     public int doUpdate(Accountdata accountdata){
         int res = accountdataMapper.updateById(accountdata);
         return res;
+    }
+
+    @RequestMapping("/getone")
+    @ResponseBody
+    public Accountdata getOne(int id){
+        Accountdata accountdata = accountdataMapper.selectById(id);
+        return accountdata;
     }
 
 }

@@ -2,9 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>记账分类</title>
+    <link rel="stylesheet" href="..\bootstrap-4.6.1-dist\css\bootstrap.min.css">
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script src="../js/button.js"></script>
 </head>
 <body>
+<div id="app" class="content">
+    <div class="tol" style="margin-top: 10px;margin-left: 5px">
+        <a class="btn  btn-outline-info" href="add.html">新增分类</a>
+    </div>
+    <table class="table" style="margin-top: 10px">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">编号</th>
+            <th scope="col">内容</th>
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="type in types">
+            <th scope="row">{{type.typeid}}</th>
+            <td>{{type.typename}}</td>
+
+            <td>
+                <button type="button" class="btn btn-danger" v-on:click="doDel(type.typeid)">删除</button>
+                <a class="btn btn-primary" v-bind:href="'update.html?id='+type.typeid">修改</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            types:[],
+        },
+        mounted:function (){
+            axios.get("/type/list").then(resp => this.types = resp.data)
+        },
+        // 删除
+        methods: {
+            doDel: function (id) {
+                axios.get("/type/delete?id="+ id).then(resp =>
+                {
+                    alert('删除成功' + resp.data);
+                    location.href=("list.html")
+                })
+            }
+        }
+
+    })
+</script>
+
+
+</div>
 
 </body>
 </html>
