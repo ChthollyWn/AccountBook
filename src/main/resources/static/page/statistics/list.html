@@ -26,10 +26,7 @@
         <tbody>
         <tr v-for="data in accountdata">
             <th scope="row">{{data.accountid}}</th>
-           <!-- <td v-for="t in types" >
-                <td v-if="t.typeid == data.typeid">{{t.typename}}</td>
-            </td>-->
-            <td>{{data.typeid}}</td>
+            <td v-for="t in types" v-if="t.typeid == data.typeid">{{t.typename}}</td>
             <td>{{accounttype[data.accounttype]}}</td>
             <td>{{data.accounttitle}}</td>
             <td>{{data.accountmoney}}</td>
